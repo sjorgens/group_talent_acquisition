@@ -15,6 +15,7 @@
 
 
     <div class="inputForm">
+
         <form ng-submit="addTalent()">
             First Name: <input type="text" ng-model="formData.firstName" /><br><br>
             Last Name: <input type="text" ng-model="formData.lastName" /><br><br>
@@ -22,16 +23,15 @@
             Salary Minimum: <input type="number" ng-model="formData.salMin" /><br><br>
             Salary Maximum: <input type="number" ng-model="formData.salMax" /><br><br>
             <input type="submit" value="Submit" /><br><br>
+            <label ng-repeat="skill in allSkills">
+                <input type="checkbox" ng-model="skill.checked" ng-value="skill.name"> {{skill.name}}
+            </label>
         </form>
 
         <form ng-submit="addSkill()">
             Additional Skill: <input type="text" ng-model="skill.newSkill" /><br><br>
             <input type="submit" value="Add Skill" />
         </form>
-
-        <label ng-repeat="skill in allSkills">
-            <input type="checkbox" ng-model="skill.checked" ng-value="skill.name"> {{skill.name}}
-        </label>
     </div>
 
     <div class="talentDisplay">
