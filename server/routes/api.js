@@ -7,26 +7,27 @@ var connectionString = 'postgres://localhost:5432/talent_skills';
 
 var router = express.Router();
 
-router.post('/addTalent', function(request, response) {
+router.post('/addTalent', function (request, response) {
 
     var results = [];
     var data = request.body;
 
-    pg.connect(connectionString, function(error, client) {
+    pg.connect(connectionString, function (error, client) {
 
-        if(error) {
+        if (error) {
             console.log(error);
-        };
+        }
+        ;
 
         client.query("INSERT INTO talent(first_name, last_name, phone, low_range, high_range) VALUES($1, $2, $3, $4, $5)", [data.firstName, data.lastName, data.phone, data.salMin, data.salMax]);
 
         var query = client.query("SELECT * FROM talent ORDER BY id ASC");
 
-        query.on('row', function(row) {
+        query.on('row', function (row) {
             results.push(row);
         });
 
-        query.on('end', function() {
+        query.on('end', function () {
             client.end();
             return response.json(results);
         });
@@ -36,23 +37,24 @@ router.post('/addTalent', function(request, response) {
 
 });
 
-router.get('/addTalent', function(request, response) {
+router.get('/addTalent', function (request, response) {
 
     var results = [];
 
-    pg.connect(connectionString, function(error, client) {
+    pg.connect(connectionString, function (error, client) {
 
-        if(error) {
+        if (error) {
             console.log(error);
-        };
+        }
+        ;
 
         var query = client.query("SELECT * FROM talent ORDER BY id ASC");
 
-        query.on('row', function(row) {
+        query.on('row', function (row) {
             results.push(row);
         });
 
-        query.on('end', function() {
+        query.on('end', function () {
             client.end();
             return response.json(results);
         });
@@ -61,58 +63,61 @@ router.get('/addTalent', function(request, response) {
 
 });
 
-router.post('/addSkill', function(request, response) {
+router.post('/addSkill', function (request, response) {
 
     var results = [];
     var data = request.body;
 
-    pg.connect(connectionString, function(error, client) {
+    pg.connect(connectionString, function (error, client) {
 
-        if(error) {
+        if (error) {
             console.log(error);
-        };
+        }
+        ;
 
         client.query("INSERT INTO skills(name) VALUES($1)", [data.newSkill]);
 
         var query = client.query("SELECT * FROM skills ORDER BY id ASC");
 
-        query.on('row', function(row) {
+        query.on('row', function (row) {
             results.push(row);
         });
 
-        query.on('end', function() {
+        query.on('end', function () {
             client.end();
             return response.json(results);
         });
 
     })
 
-    router.get('/addSkill', function(request, response) {
+});
 
-        var results = [];
+router.get('/addSkill', function (request, response) {
 
-        pg.connect(connectionString, function(error, client) {
+    var results = [];
 
-            if(error) {
-                console.log(error);
-            };
+    pg.connect(connectionString, function (error, client) {
 
-            var query = client.query("SELECT * FROM skills ORDER BY id ASC");
+        if (error) {
+            console.log(error);
+        }
+        ;
 
-            query.on('row', function(row) {
-                results.push(row);
-            });
+        var query = client.query("SELECT * FROM skills ORDER BY id ASC");
 
-            query.on('end', function() {
-                client.end();
-                return response.json(results);
-            });
+        query.on('row', function (row) {
+            results.push(row);
+        });
 
+        query.on('end', function () {
+            client.end();
+            console.log(results);
+            return response.json(results);
         });
 
     });
 
-
 });
+
 
 module.exports = router;

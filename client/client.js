@@ -10,7 +10,6 @@ app.controller('talentController', ['$scope', '$http', function($scope, $http){
     $scope.skill = {};
     $scope.allSkills = [];
 
-
     $scope.addTalent = function() {
         $scope.data = $scope.formData;
 
@@ -32,7 +31,9 @@ app.controller('talentController', ['$scope', '$http', function($scope, $http){
         });
         $http.get('/api/addSkill').success(function(response) {
             $scope.allSkills = response;
+            console.log(response);
         })
+
 
     };
 
