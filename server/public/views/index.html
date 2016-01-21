@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="talentApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Talents Aquired</title>
+    <script src="/vendor/angular/angular.min.js"></script>
+    <script src="/assets/scripts/client.min.js"></script>
+</head>
+<body ng-controller="talentController">
+    <h1>Talent Tracker</h1>
+
+    <div>
+        <button ng-click="getInfo()">Load Talent on File</button>
+    </div><br>
+
+
+    <div class="inputForm">
+        <form ng-submit="addTalent()">
+            First Name: <input type="text" ng-model="formData.firstName" /><br><br>
+            Last Name: <input type="text" ng-model="formData.lastName" /><br><br>
+            Phone: <input type="text" ng-model="formData.phone" /><br><br>
+            Salary Minimum: <input type="number" ng-model="formData.salMin" /><br><br>
+            Salary Maximum: <input type="number" ng-model="formData.salMax" /><br><br>
+            <input type="submit" value="Submit" /><br><br>
+        </form>
+
+        <form ng-submit="addSkill()">
+            Additional Skill: <input type="text" ng-model="skill.newSkill" /><br><br>
+            <input type="submit" value="Add Skill" />
+        </form>
+
+        <label ng-repeat="skill in allSkills">
+            <input type="checkbox" ng-model="skill.name" ng-value="skill"> {{skill.name}}
+        </label>
+    </div>
+
+    <div class="talentDisplay">
+        <ul>
+            <li ng-repeat="talent in allTalent">
+                Name: {{talent.first_name}} {{talent.last_name}}<br>
+                Phone: {{talent.phone}}<br>
+                Minimum Salary: {{talent.low_range}}<br>
+                Maximum Salary: {{talent.high_range}}<br>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
