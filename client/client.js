@@ -12,7 +12,7 @@ app.controller('talentController', ['$scope', '$http', function($scope, $http){
 
     $scope.addTalent = function() {
         $scope.data = $scope.formData;
-
+        console.log($scope.allSkills);
         console.log(this.formData);
         //function to POST to DB
         $http.post('/api/addTalent', $scope.data).success(function (response) {
